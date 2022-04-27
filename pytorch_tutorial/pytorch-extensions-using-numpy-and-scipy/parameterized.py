@@ -34,6 +34,7 @@ class ScipyConv2dFunction(Function):
         result = correlate2d(input.numpy(), filter.numpy(), mode='valid')
         result += bias.numpy()
         ctx.save_for_backward(input, filter, bias)
+        test = torch.as_tensor(result, dtype=input.dtype)
         return torch.as_tensor(result, dtype=input.dtype)
 
     @staticmethod
@@ -41,12 +42,14 @@ class ScipyConv2dFunction(Function):
         grad_output = grad_output.detach()
         input, filter, bias = ctx.saved_tensors
         grad_output = grad_output.numpy()
+        # keep numpy dimension,
         grad_bias = np.sum(grad_output, keepdims=True)
         grad_input = convolve2d(grad_output, filter.numpy(), mode='full')
         # the previous line can be expressed equivalently as:
         # grad_input = correlate2d(grad_output, flip(flip(filter.numpy(), axis=0), axis=1), mode='full')
         grad_filter = correlate2d(input.numpy(), grad_output, mode='valid')
-        return torch.from_numpy(grad_input), torch.from_numpy(grad_filter).to(torch.float), torch.from_numpy(grad_bias).to(torch.float)
+        return torch.from_numpy(grad_input), torch.from_numpy(grad_filter).to(torch.float), torch.from_numpy(
+            grad_bias).to(torch.float)
 
 
 class ScipyConv2d(Module):
@@ -59,10 +62,24 @@ class ScipyConv2d(Module):
         return ScipyConv2dFunction.apply(input, self.filter, self.bias)
 
 
+# Example usage
 module = ScipyConv2d(3, 3)
-print("Filter and bias: ", list(module.parameters()))
+# print("Filter and bias: ", list(module.parameters()))
 input = torch.randn(10, 10, requires_grad=True)
 output = module(input)
 print("Output from the convolution: ", output)
+# the output size is (w-f+2p)/s+1: => (10-3+0)/1+1=8
 output.backward(torch.randn(8, 8))
 print("Gradient for the input map: ", input.grad)
+print("Gradient for the filter map: ", module.filter.grad)
+print("Gradient for the bias: ", module.bias.grad)
+
+# check the gradients
+from torch.autograd.gradcheck import gradcheck
+
+moduleConv = ScipyConv2d(3, 3)
+
+input = [torch.randn(20, 20, dtype=torch.double, requires_grad=True)]
+# test = gradcheck(moduleConv, input, eps=1e-6, atol=1e-4)
+test = gradcheck(moduleConv, input)
+print("Are the gradients correct: ", test)
