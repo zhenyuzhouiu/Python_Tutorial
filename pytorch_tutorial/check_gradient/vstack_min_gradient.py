@@ -7,3 +7,4 @@ class TensorVstackGradient(torch.nn.Module):
         super(TensorVstackGradient, self).__init__()
 
     def forward(self):
+        return 0
