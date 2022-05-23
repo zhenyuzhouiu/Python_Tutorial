@@ -20,7 +20,7 @@ image_path = "/home/zhenyuzhou/Pictures/timberlake.jpg"
 # (L, LA, P, I, F, RGB, YCbCr, RGBA, CMYK, 1) or if the numpy.ndarray has dtype = np.uint8
 # In the other cases, tensors are returned without scaling.
 image_torch = transforms.ToTensor()(Image.open(image_path))
-plt.subplot(1, 4, 1)
+plt.subplot(2, 4, 1)
 plt.imshow(image_torch.numpy().transpose(1, 2, 0))
 
 rotate_angle = 30 * math.pi / 180
@@ -60,31 +60,58 @@ theta = torch.tensor(rotate_matrix, dtype=torch.float)
 # Here is a simple illustration I made showing how a 4x4 image is upsampled to 8x8.
 # When align_corners=True, pixels are regarded as a grid of points. Points at the corners are aligned.
 # When align_corners=False, pixels are regarded as 1x1 areas. Area boundaries, rather than their centers, are aligned.
-grid = functional.affine_grid(theta.unsqueeze(0), image_torch.unsqueeze(0).size(), align_corners=False)
-outputs = functional.grid_sample(image_torch.unsqueeze(0), grid, align_corners=False)
-plt.subplot(1, 4, 2)
+grid = functional.affine_grid(theta.unsqueeze(0), image_torch.unsqueeze(0).size(), align_corners=True)
+outputs = functional.grid_sample(image_torch.unsqueeze(0), grid, align_corners=True)
+plt.subplot(2, 4, 2)
 plt.imshow(outputs[0].numpy().transpose(1, 2, 0))
 
 c1, h1, w1 = image_torch.shape
-rotate_matrix1 = np.array([[math.cos(rotate_angle), -math.sin(rotate_angle)*h1/w1, 0],
-                          [math.sin(rotate_angle)*w1/h1, math.cos(rotate_angle), 0]])
+rotate_matrix1 = np.array([[math.cos(rotate_angle), -math.sin(rotate_angle) * h1 / w1, 0],
+                           [math.sin(rotate_angle) * w1 / h1, math.cos(rotate_angle), 0]])
 theta1 = torch.tensor(rotate_matrix1, dtype=torch.float)
 grid1 = functional.affine_grid(theta1.unsqueeze(0), image_torch.unsqueeze(0).size(), align_corners=True)
 outputs1 = functional.grid_sample(image_torch.unsqueeze(0), grid1, align_corners=True)
-plt.subplot(1, 4, 3)
+plt.subplot(2, 4, 3)
 plt.imshow(outputs1[0].numpy().transpose(1, 2, 0))
-
 
 c2, h2, w2 = image_torch.shape
 rotate_angle = 0
-tx = 2*175/w2
-ty = 2*100/h2
+tx = 2 * 175 / w
+ty = 2 * 100 / w
 # theta的tx，ty是和图片w/2和h/2的比值
-rotate_matrix2 = np.array([[math.cos(rotate_angle), -math.sin(rotate_angle)*h1/w1, tx],
-                          [math.sin(rotate_angle)*w1/h1, math.cos(rotate_angle), ty]])
+rotate_matrix2 = np.array([[math.cos(rotate_angle), -math.sin(rotate_angle) * h1 / w1, tx],
+                           [math.sin(rotate_angle) * w1 / h1, math.cos(rotate_angle), ty]])
 theta2 = torch.tensor(rotate_matrix2, dtype=torch.float)
 grid2 = functional.affine_grid(theta2.unsqueeze(0), image_torch.unsqueeze(0).size(), align_corners=True)
 outputs2 = functional.grid_sample(image_torch.unsqueeze(0), grid2, align_corners=True)
-plt.subplot(1, 4, 4)
+plt.subplot(2, 4, 4)
 plt.imshow(outputs2[0].numpy().transpose(1, 2, 0))
+
+c3, h3, w3 = image_torch.shape
+rotate_angle = 30 * math.pi / 180
+tx = 2 * 175 / w
+ty = 2 * 100 / w
+# theta的tx，ty是和图片w/2和h/2的比值
+rotate_matrix3 = np.array([[math.cos(rotate_angle), -math.sin(rotate_angle), tx],
+                           [math.sin(rotate_angle), math.cos(rotate_angle), ty]])
+theta3 = torch.tensor(rotate_matrix3, dtype=torch.float)
+grid3 = functional.affine_grid(theta3.unsqueeze(0), image_torch.unsqueeze(0).size(), align_corners=True)
+outputs3 = functional.grid_sample(image_torch.unsqueeze(0), grid3, align_corners=True)
+plt.subplot(2, 4, 5)
+plt.imshow(outputs3[0].numpy().transpose(1, 2, 0))
+
+sub_output3_image_torch = (image_torch - outputs3) ** 2
+plt.subplot(2, 4, 6)
+plt.imshow(sub_output3_image_torch[0].numpy().transpose(1, 2, 0))
+
+mask = torch.ones_like(image_torch)
+affine_mask = functional.grid_sample(mask.unsqueeze(0), grid3, align_corners=True)
+plt.subplot(2, 4, 7)
+plt.imshow(affine_mask[0].numpy().transpose(1, 2, 0))
+
+sub_image = (torch.mul(sub_output3_image_torch, affine_mask)) ** 2
+plt.subplot(2, 4, 8)
+plt.imshow(sub_image[0].numpy().transpose(1, 2, 0))
+
+
 plt.show()
