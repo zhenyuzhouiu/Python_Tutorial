@@ -1,13 +1,15 @@
 import numpy as np
 import scipy.io
 
-path = ["/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/codekevin/fknet/test/two-fkv3/fknet.npy",
-        "/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/codekevin/fknet/test/two-fkv3/WRS-0.001-protocol3.npy",
-        "/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/codekevin/fknet/test/two-fkv3/WS-0.01-protocol3.npy",
-        "/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/codekevin/fknet/test/two-fkv3/WS-0.001-protocol3.npy",
-        "/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/codekevin/fknet/test/fkv3/fkv3-rfn-ws-protocol.npy"]
+path = ["/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/test/gui-cross-hd/rfn-wrs-crosshd-protocol.npy",
+        "/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/test/gui-cross-hd/rfn-ws-crosshd-protocol.npy",
+        "/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/test/fkv3/efficientnet-wrs-protocol.npy",
+        "/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/test/fkv3/efficientnet-ws-protocol.npy",
+        "/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/test/fkv3/rfn-oldwrs2newwrs-protocol.npy",
+        "/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/test/fkv3/rfn-oldwrs-protocol.npy",
+        "/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/test/fkv3/rfn-ws-protocol.npy"]
 
 
-for i in range(1):
+for i in range(2):
     data = np.load(path[i], allow_pickle=True)[()]
     scipy.io.savemat(path[i][:path[i].find('.npy')] + ".mat", {'D_genuine':data['g_scores'], 'D_imposter':data['i_scores']})
