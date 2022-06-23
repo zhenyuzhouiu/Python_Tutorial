@@ -1,7 +1,7 @@
 import os
 import cv2
 
-src_path = "/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/codekevin/CodeTest_Kevin_0926/code/4b-TIFS20/data_label_190/fkv3_session1_105_221_80_48/"
+src_path = "/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/Finger-Knuckle-Recognition/dataset/PolyUKnuckleV3/yolov5/caffe/train/Session_2-80-48/"
 
 subject_name = os.listdir(src_path)
 
