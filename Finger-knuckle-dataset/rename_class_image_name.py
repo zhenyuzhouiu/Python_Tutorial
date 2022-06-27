@@ -1,10 +1,8 @@
 import os
 import shutil
 
-src_path = "/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/" \
-           "Finger-Knuckle-Recognition/dataset/PolyUHD/yolov5/train_set/"
-dst_path = "/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/" \
-           "Finger-Knuckle-Recognition/dataset/PolyUHD/yolov5/rename_train_set/"
+src_path = "/home/zhenyuzhou/Pictures/Finger-Knuckle-Database/HD/Original Images/class/"
+dst_path = "/home/zhenyuzhou/Pictures/Finger-Knuckle-Database/HD/Original Images/re_class/"
 if not os.path.exists(dst_path):
     os.mkdir(dst_path)
 

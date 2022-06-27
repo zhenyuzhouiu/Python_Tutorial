@@ -3,7 +3,7 @@ import os
 import numpy as np
 import scipy.io
 
-path = "/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/codekevin/fknet/test/yolov5vsdatabase/"
+path = "/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/codekevin/fknet/test/tmp/"
 
 file = os.listdir(path)
 

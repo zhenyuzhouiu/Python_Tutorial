@@ -1,8 +1,8 @@
 import os, shutil
 
-src_path = '/home/zhenyuzhou/Pictures/Finger-Knuckle-Database/HD/Original Images/GUI_Segment/sub_major'
-train_path = '/home/zhenyuzhou/Pictures/Finger-Knuckle-Database/HD/Original Images/GUI_Segment/train_set'
-test_path = '/home/zhenyuzhou/Pictures/Finger-Knuckle-Database/HD/Original Images/GUI_Segment/test_set'
+src_path = '/home/zhenyuzhou/Pictures/Finger-Knuckle-Database/HD/Original Images/re_class/'
+train_path = '/home/zhenyuzhou/Pictures/Finger-Knuckle-Database/HD/Original Images/train_set/'
+test_path = '/home/zhenyuzhou/Pictures/Finger-Knuckle-Database/HD/Original Images/test_set/'
 
 sub_name = os.listdir(src_path)
 

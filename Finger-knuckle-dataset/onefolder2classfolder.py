@@ -1,8 +1,8 @@
 import os
 import shutil
 
-src_path = "/home/zhenyuzhou/Pictures/Finger-Knuckle-Database/HD/Segmented Images/Major knuckle_index/"
-dst_path = "/home/zhenyuzhou/Pictures/Finger-Knuckle-Database/HD/Segmented Images/Major knuckle_index_class_folder/"
+src_path = "/home/zhenyuzhou/Pictures/Finger-Knuckle-Database/HD/Original Images/502-712(segment)/major/502-712/"
+dst_path = "/home/zhenyuzhou/Pictures/Finger-Knuckle-Database/HD/Original Images/502-712(segment)/major/class/"
 if not os.path.exists(dst_path):
     os.mkdir(dst_path)
 

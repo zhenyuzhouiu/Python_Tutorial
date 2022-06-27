@@ -1,10 +1,10 @@
 import os
 import cv2
 
-data_path = "/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/Finger-Knuckle-Recognition/dataset/PolyUKnuckleV3/yolov5/Session_2/"
+data_path = "/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/Finger-Knuckle-Recognition/dataset/PolyUHD/yolov5/middle_finger/all/"
 
-dst_path_test = "/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/Finger-Knuckle-Recognition/dataset/PolyUKnuckleV3/yolov5/Session_2_100_70/"
-dst_path_train = "/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/Finger-Knuckle-Recognition/dataset/PolyUKnuckleV3/yolov5/Session_2_80_48/"
+dst_path_test = "/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/Finger-Knuckle-Recognition/dataset/PolyUHD/yolov5/middle_finger/all_100_70/"
+dst_path_train = "/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/Finger-Knuckle-Recognition/dataset/PolyUHD/yolov5/middle_finger/all_80_48/"
 if not os.path.exists(dst_path_test):
     os.mkdir(dst_path_test)
 if not os.path.exists(dst_path_train):
