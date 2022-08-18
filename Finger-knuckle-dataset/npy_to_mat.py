@@ -3,7 +3,7 @@ import os
 import numpy as np
 import scipy.io
 
-path = "/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/codekevin/fknet/test/cross-hd-index-fkv3(yolov5)-105-221/"
+path = "/home/zhenyuzhou/Desktop/finger-knuckle/deep-learning/codekevin/fknet/test/tl-sttl-rsil/"
 
 file = os.listdir(path)
 
