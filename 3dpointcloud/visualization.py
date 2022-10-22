@@ -1,10 +1,14 @@
 import numpy as np
-import open3d.cuda.pybind.visualization
 from open3d import *
+import os
 
-def main():
-    cloud = open3d.io.read_point_cloud('./Scaniverse 2022-08-18 130212.ply')
+def main(path):
+    cloud = open3d.io.read_point_cloud(path)
     open3d.visualization.draw_geometries([cloud])
 
 if __name__ == '__main__':
-    main()
+    source_path = "./ply/"
+    files = os.listdir(source_path)
+    for f in files:
+        path = os.path.join(source_path, f)
+        main(path)
