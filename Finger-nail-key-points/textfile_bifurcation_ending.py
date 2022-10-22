@@ -1,7 +1,7 @@
 import os
 
-bifurcation_path = "/home/zhenyuzhou/Desktop/YOLOv5_OBB/imgs/blood_vessel/textfile/train-textfile/result_center_bifurcation/"
-ending_path = "/home/zhenyuzhou/Desktop/YOLOv5_OBB/imgs/blood_vessel/textfile/train-textfile/result_center_ending/"
+bifurcation_path = "/home/zhenyuzhou/Desktop/YOLOv5/YOLOv5_OBB/imgs/blood_vessel/ending/02-09-2022-textfile-iou-0.4-conf-0.1/detection-bifurcation/result_txt/result_center/"
+ending_path = "/home/zhenyuzhou/Desktop/YOLOv5/YOLOv5_OBB/imgs/blood_vessel/ending/02-09-2022-textfile-iou-0.4-conf-0.1/detection/result_txt/result_center/"
 
 text_file = os.listdir(bifurcation_path)
 
