@@ -13,7 +13,7 @@ from torch.nn import functional
 
 # 旋转操作
 
-image_path = "/home/zhenyuzhou/Pictures/timberlake.jpg"
+image_path = r"C:\Users\ZhenyuZHOU\Pictures\Master.png"
 # transforms.ToTensor()
 # Converts a PIL Image or numpy.ndarray (H x W x C) in the range [0, 255] to a torch.
 # FloatTensor of shape (C x H x W) in the range [0.0, 1.0] if the PIL Image belongs to one of the modes
