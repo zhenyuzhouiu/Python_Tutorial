@@ -1,8 +1,8 @@
 import os
 import shutil
 
-src_path = "/home/zhenyuzhou/Pictures/Finger-Knuckle-Database/HD/Original Images/class/"
-dst_path = "/home/zhenyuzhou/Pictures/Finger-Knuckle-Database/HD/Original Images/re_class/"
+src_path = "/media/zhenyuzhou/Data/finger_knuckle_2018/FingerKnukcleDatabase/Finger-knuckle/mask-seg-80-48/01/"
+dst_path = "/media/zhenyuzhou/Data/finger_knuckle_2018/FingerKnukcleDatabase/Finger-knuckle/mask-seg-80-48/01-rename/"
 if not os.path.exists(dst_path):
     os.mkdir(dst_path)
 
