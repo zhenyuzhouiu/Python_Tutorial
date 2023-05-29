@@ -1,0 +1,4 @@
+checkpoints/*
+dataset/*
+runs/*
+3dpointcloud/*.ply
